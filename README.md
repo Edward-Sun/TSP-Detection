@@ -2,7 +2,7 @@
 
 Here are the code for [the ICCV paper](https://arxiv.org/abs/2011.10881). The code is adapted from [Detectron2](https://github.com/facebookresearch/detectron2) and [AdelaiDet](https://github.com/aim-uofa/AdelaiDet).
 
-The model is trained on 4 V100 GPUs.
+All the model are trained on 4 V100 GPUs.
 
 ## Prerequisites
 
