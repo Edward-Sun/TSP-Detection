@@ -19,6 +19,20 @@ git reset --hard b88c6c06563e4db1139aafbd6d8d97d1fa7a57e4
 pip install -e .
 ```
 
+## Rreproducing Results
+
+For TSP-FCOS,
+
+```bash
+bash tsp_fcos.sh
+```
+
+For TSP-RCNN,
+
+```bash
+bash tsp_rcnn.sh
+```
+
 ## Citation
 ```
 @InProceedings{Sun_2021_ICCV,
