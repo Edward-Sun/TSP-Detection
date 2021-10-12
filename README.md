@@ -6,7 +6,7 @@ The model is trained on 4 V100 GPUs.
 
 ## Prerequisites
 
-Modify the environment name and path in `environment.yml` and run
+Modify the environment name and prefix in `environment.yml` and run
 
 ```bash
 conda env create -f environment.yml
