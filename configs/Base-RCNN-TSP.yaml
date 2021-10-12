@@ -1,0 +1,61 @@
+MODEL:
+  META_ARCHITECTURE: "GeneralizedRCNN"
+  MASK_ON: False
+  BACKBONE:
+    NAME: "build_resnet_myfpn_backbone_v2"
+  RESNETS:
+    OUT_FEATURES: ["res2", "res3", "res4", "res5"]
+  FPN:
+    IN_FEATURES: ["res2", "res3", "res4", "res5"]
+  ANCHOR_GENERATOR:
+    SIZES: [[32], [64], [128], [256], [512]]  # One size for each in feature map
+    ASPECT_RATIOS: [[0.5, 1.0, 2.0]]  # Three aspect ratios (same for all in feature maps)
+  RPN:
+    IN_FEATURES: ["p2", "p3", "p4", "p5", "p6"]
+    PRE_NMS_TOPK_TRAIN: 2000  # Per FPN level
+    PRE_NMS_TOPK_TEST: 1000  # Per FPN level
+    # Detectron1 uses 2000 proposals per-batch,
+    # (See "modeling/rpn/rpn_outputs.py" for details of this legacy issue)
+    # which is approximately 1000 proposals per-image since the default batch size for FPN is 2.
+    POST_NMS_TOPK_TRAIN: 1000
+    POST_NMS_TOPK_TEST: 1000
+  ROI_HEADS:
+    NAME: "TransformerROIHeads"
+    IN_FEATURES: ["p2", "p3", "p4", "p5"]
+    BATCH_SIZE_PER_IMAGE: 1000
+    SCORE_THRESH_TEST: 0.0
+  ROI_BOX_HEAD:
+    NAME: "MyFastRCNNTransformerHead"
+    POOLER_RESOLUTION: 7
+    BBOX_REG_LOSS_TYPE: "smooth_l1+giou"
+  MY_ROI_BOX_HEAD:
+    DIM_FEEDFORWARD: 1024
+    USE_POSITION_ENCODING: True
+  ROI_MASK_HEAD:
+    NAME: "MaskRCNNConvUpsampleHead"
+    NUM_CONV: 4
+    POOLER_RESOLUTION: 14
+DATASETS:
+  TRAIN: ("coco_2017_train",)
+  TEST: ("coco_2017_val",)
+SOLVER:
+  IMS_PER_BATCH: 16
+  BASE_LR: 0.02
+  TRANSFORMER_MULTIPLIER: 0.005
+  STEPS: (60000, 80000)
+  MAX_ITER: 90000
+  OPTIMIZER: "HYBRID"
+  BOTTOM_UP_MULTIPLIER: 1.0
+  WEIGHT_DECAY: 0.0001
+  CLIP_GRADIENTS:
+    ENABLED: True
+    CLIP_TYPE: "full_model"
+    CLIP_VALUE: 0.01
+    NORM_TYPE: 2.0
+INPUT:
+  MIN_SIZE_TRAIN: (640, 672, 704, 736, 768, 800)
+VERSION: 2
+TEST:
+  EVAL_PERIOD: 5000
+SEED: 42
+VIS_PERIOD: 500
