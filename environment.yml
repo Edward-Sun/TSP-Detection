@@ -1,4 +1,4 @@
-name: detr
+name: your_name
 channels:
   - pytorch
   - defaults
@@ -165,4 +165,4 @@ dependencies:
     - urllib3==1.25.10
     - werkzeug==1.0.1
     - yacs==0.1.8
-prefix: your_path
+prefix: your_prefix
