@@ -27,7 +27,7 @@ from troi import add_troi_config, DetrDatasetMapper
 from torch.nn.parallel import DistributedDataParallel
 from detectron2.modeling.meta_arch import GeneralizedRCNN
 from detectron2.modeling import GeneralizedRCNNWithTTA, DatasetMapperTTA
-from troi.my_fast_rcnn_output import fast_rcnn_inference_single_image
+from rcnn.my_fast_rcnn_output import fast_rcnn_inference_single_image
 
 from contextlib import ExitStack, contextmanager
 
