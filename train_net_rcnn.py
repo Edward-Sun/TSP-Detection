@@ -22,7 +22,7 @@ from detectron2.data import build_detection_train_loader
 from detectron2.engine import DefaultTrainer, default_argument_parser, default_setup, launch
 from detectron2.evaluation import COCOEvaluator
 from detectron2.solver.build import maybe_add_gradient_clipping
-from troi import add_troi_config, DetrDatasetMapper
+from rcnn import add_rcnn_config, DetrDatasetMapper
 
 from torch.nn.parallel import DistributedDataParallel
 from detectron2.modeling.meta_arch import GeneralizedRCNN
